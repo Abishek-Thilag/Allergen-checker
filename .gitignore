@@ -1,0 +1,12 @@
+allergy_checker.db
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+.venv/
+venv/
+.streamlit/secrets.toml
+test_results.txt
+*.egg-info/
+dist/
+build/

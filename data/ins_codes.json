@@ -1,0 +1,177 @@
+{
+  "100": {
+    "name": "Curcumin",
+    "possible_allergens": [],
+    "variable_source": false,
+    "explanation": "INS 100 is curcumin, a yellow pigment from turmeric. No allergen link.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "101": {
+    "name": "Riboflavin (Vitamin B2)",
+    "possible_allergens": ["milk", "egg"],
+    "variable_source": true,
+    "explanation": "INS 101 is riboflavin (Vitamin B2). It can be produced by fermentation or derived from whey (milk) or egg. The manufacturing source is not always declared on the label.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "120": {
+    "name": "Cochineal / Carminic acid",
+    "possible_allergens": [],
+    "variable_source": false,
+    "explanation": "INS 120 is cochineal (carminic acid), a red dye from the cochineal insect. It is not a major food allergen under standard allergen regulations, but rare reactions have been reported. It is not derived from shellfish.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "160a": {
+    "name": "Beta-carotene",
+    "possible_allergens": ["soy"],
+    "variable_source": true,
+    "explanation": "INS 160a is beta-carotene. Pure beta-carotene has no allergen link, but some commercial preparations use a soy-oil carrier or are processed on equipment shared with soy products. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "270": {
+    "name": "Lactic acid",
+    "possible_allergens": ["milk"],
+    "variable_source": true,
+    "explanation": "INS 270 is lactic acid. It is generally produced by bacterial fermentation of carbohydrates and is typically vegan. However, some preparations may use a dairy-derived substrate. The manufacturing source is not always declared.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "306": {
+    "name": "Tocopherol-rich extract (Vitamin E)",
+    "possible_allergens": ["soy", "wheat"],
+    "variable_source": true,
+    "explanation": "INS 306 is a tocopherol-rich extract used as an antioxidant. It can be sourced from soy, wheat germ, or sunflower. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA"
+  },
+  "307": {
+    "name": "Alpha-tocopherol (Vitamin E)",
+    "possible_allergens": ["soy", "wheat"],
+    "variable_source": true,
+    "explanation": "INS 307 is alpha-tocopherol (Vitamin E). Commonly derived from soy or wheat germ oil. The source is not always declared on the label.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "322": {
+    "name": "Lecithin",
+    "possible_allergens": ["soy", "egg"],
+    "variable_source": true,
+    "explanation": "INS 322 is lecithin, an emulsifier. It can be derived from soy, egg yolk, or sunflower. When the source is soy or egg, it may trigger an allergic reaction. The source is not always declared on the label.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "422": {
+    "name": "Glycerol (Glycerine)",
+    "possible_allergens": [],
+    "variable_source": false,
+    "explanation": "INS 422 is glycerol (glycerine). It is generally produced synthetically or from vegetable oils. No allergen link under standard regulations.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "441": {
+    "name": "Gelatine",
+    "possible_allergens": [],
+    "variable_source": false,
+    "explanation": "INS 441 is gelatine, derived from animal collagen (porcine or bovine). Not a major food allergen under standard allergen regulations, but relevant for dietary restrictions.",
+    "source": "Codex Alimentarius GSFA"
+  },
+  "471": {
+    "name": "Mono- and diglycerides of fatty acids",
+    "possible_allergens": ["soy", "wheat"],
+    "variable_source": true,
+    "explanation": "INS 471 is mono- and diglycerides of fatty acids. They can be derived from animal fats or vegetable oils including soy. The source is not always declared. Some preparations may contain trace gluten if derived from wheat.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "472e": {
+    "name": "Diacetyltartaric and fatty acid esters of glycerol (DATEM)",
+    "possible_allergens": ["soy", "wheat"],
+    "variable_source": true,
+    "explanation": "INS 472e (DATEM) is an emulsifier. The fatty acid component can be derived from soy or wheat. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA"
+  },
+  "476": {
+    "name": "Polyglycerol polyricinoleate (PGPR)",
+    "possible_allergens": [],
+    "variable_source": false,
+    "explanation": "INS 476 is PGPR, an emulsifier derived from castor oil. No confirmed allergen link under standard regulations.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "481": {
+    "name": "Sodium stearoyl lactylate (SSL)",
+    "possible_allergens": ["milk"],
+    "variable_source": true,
+    "explanation": "INS 481 is sodium stearoyl lactylate (SSL), an emulsifier. It contains a lactate group, which can be derived from milk (dairy lactic acid) or produced synthetically. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "482": {
+    "name": "Calcium stearoyl lactylate",
+    "possible_allergens": ["milk"],
+    "variable_source": true,
+    "explanation": "INS 482 is calcium stearoyl lactylate, similar to INS 481. Its lactate group may be milk-derived. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA"
+  },
+  "570": {
+    "name": "Stearic acid",
+    "possible_allergens": [],
+    "variable_source": true,
+    "explanation": "INS 570 is stearic acid, used as an anticaking agent. It can be of animal (tallow) or vegetable origin. No confirmed allergen link, but relevant for dietary restrictions.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "627": {
+    "name": "Disodium guanylate",
+    "possible_allergens": ["fish"],
+    "variable_source": true,
+    "explanation": "INS 627 is disodium guanylate, a flavour enhancer. It can be produced from yeast extract, dried fish, or tapioca. When fish-derived, it may be a concern for fish allergy sufferers. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "631": {
+    "name": "Sodium inosinate",
+    "possible_allergens": ["fish"],
+    "variable_source": true,
+    "explanation": "INS 631 is sodium inosinate, a flavour enhancer. It is commonly derived from fish (dried bonito) or pork. When fish-derived, it may trigger fish allergy. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "635": {
+    "name": "Disodium 5'-ribonucleotides",
+    "possible_allergens": ["fish"],
+    "variable_source": true,
+    "explanation": "INS 635 is a mixture of disodium guanylate (INS 627) and sodium inosinate (INS 631). It is often fish-derived. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "901": {
+    "name": "Beeswax",
+    "possible_allergens": [],
+    "variable_source": false,
+    "explanation": "INS 901 is beeswax, a glazing agent. It is not a major food allergen under standard allergen regulations.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "1105": {
+    "name": "Lysozyme",
+    "possible_allergens": ["egg"],
+    "variable_source": false,
+    "explanation": "INS 1105 is lysozyme, a preservative enzyme extracted from egg white. It is an egg allergen.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "1442": {
+    "name": "Hydroxypropyl distarch phosphate",
+    "possible_allergens": ["wheat"],
+    "variable_source": true,
+    "explanation": "INS 1442 is hydroxypropyl distarch phosphate, a modified starch. It can be derived from wheat, maize, potato, or tapioca. When wheat-derived, it may contain trace gluten. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  },
+  "1400": {
+    "name": "Dextrin roasted starch",
+    "possible_allergens": ["wheat"],
+    "variable_source": true,
+    "explanation": "INS 1400 is dextrin from roasted starch. It can be derived from wheat, maize, or potato. When wheat-derived, it may contain trace gluten. The source is not always declared.",
+    "source": "Codex Alimentarius GSFA"
+  },
+  "1404": {
+    "name": "Oxidised starch",
+    "possible_allergens": ["wheat"],
+    "variable_source": true,
+    "explanation": "INS 1404 is oxidised starch, a modified starch that can be derived from wheat, maize, potato, or tapioca. When wheat-derived, gluten traces may be present. Source not always declared.",
+    "source": "Codex Alimentarius GSFA"
+  },
+  "1422": {
+    "name": "Acetylated distarch adipate",
+    "possible_allergens": ["wheat"],
+    "variable_source": true,
+    "explanation": "INS 1422 is acetylated distarch adipate, a modified starch. It can be derived from wheat, maize, or potato. When wheat-derived, it may contain trace gluten. Source not always declared.",
+    "source": "Codex Alimentarius GSFA; FSSAI Food Additives Regulations 2011"
+  }
+}
