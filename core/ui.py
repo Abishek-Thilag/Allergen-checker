@@ -142,6 +142,15 @@ text-shadow:0 1px 4px rgba(0,0,0,.30) !important;
 background:var(--tint) !important;
 border-right:1px solid var(--border-tint) !important;
 }}
+[data-testid="stSidebar"] > div:first-child {{
+padding-top: 0.5rem !important;
+padding-bottom: 1rem !important;
+padding-left: 0.75rem !important;
+padding-right: 0.75rem !important;
+}}
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{
+gap: 0.5rem !important;
+}}
 [data-testid="stSidebar"] a {{
 border-radius:var(--radius-sm) !important;
 font-family:'Plus Jakarta Sans',sans-serif !important;
@@ -151,6 +160,17 @@ transition:var(--transition) !important;
 [data-testid="stSidebar"] a:hover {{
 background:rgba(210,10,46,.08) !important;
 color:var(--cherry) !important;
+}}
+.sidebar-card {{
+background: #FFFFFF !important;
+border-left: 4px solid var(--cherry) !important;
+border-top: 1px solid var(--border-tint) !important;
+border-right: 1px solid var(--border-tint) !important;
+border-bottom: 1px solid var(--border-tint) !important;
+border-radius: 10px !important;
+padding: 10px 12px !important;
+margin-bottom: 0.5rem !important;
+box-shadow: 0 2px 6px rgba(210,10,46,.04) !important;
 }}
 .stButton>button[kind="primary"] {{
 background:linear-gradient(135deg,{CHERRY},{DARK_CHERRY}) !important;

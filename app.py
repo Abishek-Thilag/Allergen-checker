@@ -108,6 +108,9 @@ import views.home as _home
 import views.check as _check
 import views.history as _history
 import views.about as _about
+import views.sidebar as _sidebar
+
+_sidebar.render_sidebar()
 
 pg = st.navigation([
     st.Page(lambda: _home.show(),    title="Home",    icon="🏠", url_path="home",    default=True),
