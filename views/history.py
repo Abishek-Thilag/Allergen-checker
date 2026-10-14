@@ -88,33 +88,40 @@ Every check you run is saved here. Filter, reopen or delete entries.
         total = n_present = n_may = n_none = 0
 
     render_html(f"""
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;">
-<div style="background:{WHITE};border:1.5px solid {BORDER_TINT};border-radius:12px;
-    padding:14px 16px;text-align:center;box-shadow:0 2px 6px rgba(210,4,45,.05);">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;">
+<div style="background:{WHITE};border:1.5px solid {BORDER_TINT};border-radius:14px;
+    padding:16px 18px;text-align:center;box-shadow:0 2px 8px rgba(210,10,46,.05);">
+<div style="font-size:1.4rem;margin-bottom:4px;">📊</div>
 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
-    font-size:1.6rem;color:{TEXT_DARK};">{total}</div>
-<div style="font-size:0.78rem;color:{TEXT_MUTED};margin-top:2px;">Total checks</div>
+    font-size:1.8rem;color:{TEXT_DARK};line-height:1;">{total}</div>
+<div style="font-size:0.78rem;color:{TEXT_MUTED};margin-top:4px;font-weight:600;">Total Checks Run</div>
 </div>
-<div style="background:{PRESENT_BG};border:1.5px solid {PRESENT_BORDER};border-radius:12px;
-    padding:14px 16px;text-align:center;">
+<div style="background:{PRESENT_BG};border:1.5px solid {PRESENT_BORDER};border-radius:14px;
+    padding:16px 18px;text-align:center;box-shadow:0 2px 8px rgba(92,5,22,.2);">
+<div style="font-size:1.4rem;margin-bottom:4px;">{PRESENT_ICON}</div>
 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
-    font-size:1.6rem;color:{PRESENT_FG};">{n_present}</div>
-<div style="font-size:0.78rem;color:{PRESENT_FG};margin-top:2px;opacity:.85;">
-{PRESENT_ICON} {PRESENT_LABEL}</div>
+    font-size:1.8rem;color:{PRESENT_FG};line-height:1;">{n_present}</div>
+<div style="font-size:0.78rem;color:{PRESENT_FG};margin-top:4px;font-weight:600;opacity:.95;">
+{PRESENT_LABEL}
 </div>
-<div style="background:{MAY_BG};border:1.5px solid {MAY_BORDER};border-radius:12px;
-    padding:14px 16px;text-align:center;">
-<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
-    font-size:1.6rem;color:{MAY_FG};">{n_may}</div>
-<div style="font-size:0.78rem;color:{MAY_FG};margin-top:2px;opacity:.85;">
-{MAY_ICON} {MAY_LABEL}</div>
 </div>
-<div style="background:{NO_MATCH_BG};border:1.5px solid {NO_MATCH_BORDER};border-radius:12px;
-    padding:14px 16px;text-align:center;">
+<div style="background:{MAY_BG};border:1.5px solid {MAY_BORDER};border-radius:14px;
+    padding:16px 18px;text-align:center;box-shadow:0 2px 8px rgba(184,69,0,.2);">
+<div style="font-size:1.4rem;margin-bottom:4px;">{MAY_ICON}</div>
 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
-    font-size:1.6rem;color:{NO_MATCH_FG};">{n_none}</div>
-<div style="font-size:0.78rem;color:{NO_MATCH_FG};margin-top:2px;opacity:.85;">
-{NO_MATCH_ICON} No Match</div>
+    font-size:1.8rem;color:{MAY_FG};line-height:1;">{n_may}</div>
+<div style="font-size:0.78rem;color:{MAY_FG};margin-top:4px;font-weight:600;opacity:.95;">
+{MAY_LABEL}
+</div>
+</div>
+<div style="background:{NO_MATCH_BG};border:1.5px solid {NO_MATCH_BORDER};border-radius:14px;
+    padding:16px 18px;text-align:center;box-shadow:0 2px 8px rgba(210,10,46,.08);">
+<div style="font-size:1.4rem;margin-bottom:4px;">{NO_MATCH_ICON}</div>
+<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
+    font-size:1.8rem;color:{NO_MATCH_FG};line-height:1;">{n_none}</div>
+<div style="font-size:0.78rem;color:{NO_MATCH_FG};margin-top:4px;font-weight:600;">
+No Match Detected
+</div>
 </div>
 </div>
 """)
@@ -127,7 +134,7 @@ Every check you run is saved here. Filter, reopen or delete entries.
         return
 
     profile_options = {"All Profiles": None} | {p.name: p.id for p in profiles}
-    col_f1, col_f2 = st.columns(2)
+    col_f1, col_f2, col_f3 = st.columns([1, 1, 1])
     with col_f1:
         selected_profile_name = st.selectbox(
             "👤 Filter By Profile", list(profile_options.keys()), key="hist_profile_filter"
@@ -143,27 +150,85 @@ Every check you run is saved here. Filter, reopen or delete entries.
         selected_status_label = st.selectbox(
             "🏷️ Filter By Status", list(status_options.keys()), key="hist_status_filter"
         )
+    with col_f3:
+        kw_search = st.text_input("🔎 Search In Text", placeholder="e.g. chocolate, maida...", key="hist_kw_search")
 
     profile_id_filter = profile_options[selected_profile_name]
     status_filter = status_options[selected_status_label]
 
     try:
         entries = get_history(profile_id=profile_id_filter, status_filter=status_filter)
+        if kw_search.strip():
+            entries = [e for e in entries if kw_search.strip().lower() in e.ingredient_text.lower()]
     except Exception as exc:
         st.error(f"Could not load history: {exc}")
         return
 
     if not entries:
         render_html(f"""
-<div class="fade-up" style="background:{TINT};border:1.5px solid {BORDER_TINT};
-    border-radius:14px;padding:40px 24px;text-align:center;margin-top:24px;">
-<div style="font-size:2.5rem;margin-bottom:12px;">📭</div>
-<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;
-    font-size:1.1rem;color:{DARK_CHERRY};margin-bottom:6px;">No history yet</div>
-<div style="font-size:0.875rem;color:{TEXT_MUTED};">
-Run a check on the Check page and it will appear here.
+<div class="fade-up" style="background:{WHITE};border:1.5px solid {BORDER_TINT};
+    border-radius:18px;padding:36px 28px;text-align:center;margin-top:16px;
+    box-shadow:0 4px 16px rgba(210,10,46,.05);">
+<div style="font-size:3rem;margin-bottom:10px;">📭</div>
+<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
+    font-size:1.25rem;color:{DARK_CHERRY};margin-bottom:6px;">No Inspection History Found</div>
+<div style="font-size:0.875rem;color:{TEXT_MUTED};max-width:420px;margin:0 auto 18px;line-height:1.6;">
+{"No past checks match your current filter criteria." if (profile_id_filter or status_filter or kw_search.strip()) else "When you analyze ingredients on the Check page, your scan history, timestamps, and findings will be automatically archived here."}
+</div>
+<a href="/Check" target="_self" style="text-decoration:none;">
+<div style="background:linear-gradient(135deg,{CHERRY},{DARK_CHERRY});color:#fff;
+    border-radius:12px;padding:11px 24px;font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:700;font-size:0.92rem;display:inline-flex;align-items:center;gap:6px;
+    box-shadow:0 4px 12px rgba(210,10,46,.25);">
+🔍 Run An Ingredient Check &rarr;
+</div>
+</a>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;">
+<div style="background:{WHITE};border:1px solid {BORDER_TINT};border-radius:14px;padding:16px 18px;">
+<div style="font-size:1.5rem;margin-bottom:6px;">🩺</div>
+<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:0.92rem;color:{DARK_CHERRY};margin-bottom:4px;">
+Consult With Allergists
+</div>
+<div style="font-size:0.8rem;color:{TEXT_MUTED};line-height:1.5;">
+Show historical ingredient scans directly to your medical specialist during allergy reviews.
 </div>
 </div>
+
+<div style="background:{WHITE};border:1px solid {BORDER_TINT};border-radius:14px;padding:16px 18px;">
+<div style="font-size:1.5rem;margin-bottom:6px;">🔍</div>
+<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:0.92rem;color:{DARK_CHERRY};margin-bottom:4px;">
+Track Brand Changes
+</div>
+<div style="font-size:0.8rem;color:{TEXT_MUTED};line-height:1.5;">
+Compare old package checks with newly bought items to catch silent recipe reformulations.
+</div>
+</div>
+
+<div style="background:{WHITE};border:1px solid {BORDER_TINT};border-radius:14px;padding:16px 18px;">
+<div style="font-size:1.5rem;margin-bottom:6px;">🔒</div>
+<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:0.92rem;color:{DARK_CHERRY};margin-bottom:4px;">
+100% Offline Database
+</div>
+<div style="font-size:0.8rem;color:{TEXT_MUTED};line-height:1.5;">
+Stored in local SQLite on your system. Zero cloud databases or external telemetry.
+</div>
+</div>
+</div>
+
+<div style="background:#1F2937;border-radius:14px;padding:20px 28px;
+    margin-top:28px;display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:12px;">
+<div style="font-size:0.8rem;color:#9CA3AF;">
+🥛 <strong style="color:#fff;">Food Allergy Ingredient Checker</strong> ·
+History stored locally in SQLite
+</div>
+<div style="font-size:0.75rem;color:#6B7280;">
+⚠️ Always read the original product label before consuming.
+</div>
+</div>
+<div style="height:24px;"></div>
 """)
         return
 
@@ -179,6 +244,7 @@ entr{'y' if len(entries) == 1 else 'ies'} found
         bg, border, status_label, fg = _STATUS_META.get(
             entry.summary_status, (WHITE, BORDER_TINT, entry.summary_status, TEXT_DARK)
         )
+        pill_bg = "rgba(0,0,0,.18)" if fg == "#FFFFFF" else "rgba(255,255,255,.45)" if bg != WHITE else "rgba(210,10,46,.10)"
         try:
             dt = datetime.fromisoformat(entry.timestamp)
             ts_display = dt.strftime("%d %b %Y, %H:%M UTC")
@@ -191,7 +257,7 @@ entr{'y' if len(entries) == 1 else 'ies'} found
 
         render_html(f"""
 <div class="fade-up" style="background:{WHITE};border-radius:12px;
-    border:1.5px solid {border};box-shadow:0 2px 8px rgba(210,4,45,.06);
+    border:1.5px solid {border};box-shadow:0 2px 8px rgba(210,10,46,.06);
     overflow:hidden;margin-bottom:4px;">
 <div style="background:{bg};padding:10px 16px;
     display:flex;justify-content:space-between;align-items:center;
@@ -202,7 +268,7 @@ entr{'y' if len(entries) == 1 else 'ies'} found
 <span style="font-size:0.78rem;color:{fg if bg != WHITE else TEXT_MUTED};">
 👤 {entry.profile_name}</span>
 </div>
-<span style="background:rgba(0,0,0,.18);color:{fg};border-radius:20px;
+<span style="background:{pill_bg};color:{fg};border-radius:20px;
     padding:3px 13px;font-size:0.78rem;font-weight:700;">
 {status_label}</span>
 </div>

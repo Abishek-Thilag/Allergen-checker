@@ -171,3 +171,48 @@ This file records significant architectural and design decisions, the options co
 **Decision:** Palette updated to `CHERRY=#D20A2E`, `DARK_CHERRY=#8F0720`, `DEEP_CHERRY=#5C0516`, `TINT=#FCE8EB`.
 
 **Status colour mapping:** PRESENT uses `DEEP_CHERRY` (`#5C0516`) — significantly darker than the brand cherry — so it reads as a distinct, urgent warning rather than brand styling. MAY CONTAIN (`#B84500` orange) and UNCERTAIN (`#C97A00` amber) use different hue families. All status colours pass WCAG AA contrast for their text colour. NOT RECOGNISED uses neutral grey to communicate absence of information rather than severity.
+
+---
+
+## DEC-17 — UI Polish: Hero Typography, Capitalized Navigation, and Distinct Status Colors
+
+**Decision:**
+1. **Hero Title Specificity:** Styled `.hero h1, .hero h2, .hero h3 { color: #FFFFFF !important; }` with a subtle text-shadow (`0 1px 4px rgba(0,0,0,.30)`). Headings outside the hero remain in dark cherry (`#8F0720`), and the white "Check Ingredients" button preserves dark cherry text.
+2. **Sidebar Navigation Titles:** Sidebar displays exactly "Home", "Check", "History", and "About" via `st.navigation` using `st.Page(..., title=..., url_path=...)`. Unique URL paths eliminate lambda naming collisions, `pages/` auto-detection is removed, and `st.set_page_config` resides exclusively in `app.py`.
+3. **WCAG AA Status System:**
+   - `PRESENT`: Deep cherry (`#5C0516`) with white text and `⛔` icon.
+   - `MAY CONTAIN`: Orange (`#B84500`) with white text and `⚠️` icon.
+   - `UNCERTAIN`: Yellow (`#EAB308`) with dark text (`#2B1B1E`) and `❓` icon (contrast ratio > 7:1).
+   - `NOT RECOGNISED`: Grey (`#F3F4F6` / `#374151`) with `❔` icon.
+   - `No known match found`: White card with cherry outline (`#D20A2E`), dark cherry text, and `✅` icon.
+   - Every status maintains explicit text labels and icon double/triple-coding.
+4. **Theme Cohesion:** Palette (`#D20A2E`, `#8F0720`, `#5C0516`, `#FCE8EB`, `#FFFFFF`) applied across `.streamlit/config.toml` and `core/ui.py`. Removed any leftover off-theme alert colors in favor of the cherry tint system.
+
+---
+
+## DEC-18 — Visual Polish: Hero Live Preview, Quick Preset Chips, and Rich Empty States
+
+**Decision:**
+1. **Interactive Hero Preview:** Enriched the landing page hero with a live detection preview card illustrating a dual-allergen detection scenario (Casein/Whey & INS 322).
+2. **Quick Preset Chips:** Added 4 one-click ingredient preset buttons in the Check page's Manual tab (`🍫 Chocolate`, `🍪 Biscuit`, `🍜 Noodles`, `🥜 Namkeen`) so users can test the engine instantly without typing.
+3. **Engine-Ready Dashboard State:** Replaced the empty dashed box on the Check page with a structured, illustrated inspection readiness dashboard outlining detection capabilities and status references.
+4. **Dashboard-Grade History Tiles:** Elevated the History page metrics with iconography, distinct status cards, and an empty state guiding the user to run their first check.
+
+---
+
+## DEC-19 — Dense Layout & Dynamic Elements: Two-Column Check Station, Synonym Sandbox, and Allergen Spectrum
+
+**Decision:**
+1. **Container Width and Spacing Constraint:** Adjusted container `max-width: 1380px` centered with tightened vertical gaps (`0.75rem`) and reduced top/bottom padding to prevent elements from stretching into vacant whitespace on ultrawide screens.
+2. **Two-Column Check Station:** Structured the Check page into a balanced 62/38 two-column layout:
+   - **Left Column:** Quick sample presets, multi-input tabs (Manual/OCR/Sample Library), primary action button, and live audit findings / engine readiness state.
+   - **Right Column (Live Context & Intelligence):** Always-visible Profile Watchlist with severity pills (🔴 Severe, 🟠 Moderate, 🟡 Mild), Indian Packaged Food Risk Radar, INS Additive Quick Codex, and 100% On-Device verification guarantee.
+3. **Interactive Home Page Elements:**
+   - **Live Synonym Sandbox:** Added interactive one-click decode buttons for common Indian aliases (`maida`, `groundnut`, `casein`, `whey`, `INS 322`, `til`, `hing`, `khoya`) that resolve instant explanations on-page.
+   - **Top 10 Indian Allergen Spectrum Grid:** Added a 5x2 visual matrix detailing the 10 standard allergen families and their regional aliases.
+   - **Allergen Safety FAQ Accordion:** Interactive expanders explaining FSSAI labeling nuances, cross-contamination, and offline privacy.
+4. **Enhanced History & Decoder Interactivity:**
+   - Added real-time text keyword search across historical ingredient panels.
+   - Added category filter pills and live name search for the Hidden Name Reference Decoder table.
+
+

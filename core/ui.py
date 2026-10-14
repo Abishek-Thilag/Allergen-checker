@@ -76,9 +76,9 @@ MAY_BORDER       = "#8C3200"
 MAY_ICON         = "⚠️"
 MAY_LABEL        = "MAY CONTAIN"
 
-UNCERTAIN_FG     = "#2B1B1E"   # dark text on amber — WCAG AA (ratio > 4.5)
-UNCERTAIN_BG     = "#C97A00"   # amber-yellow
-UNCERTAIN_BORDER = "#9A5C00"
+UNCERTAIN_FG     = "#2B1B1E"   # dark text on yellow — WCAG AA (ratio > 7:1)
+UNCERTAIN_BG     = "#EAB308"   # yellow
+UNCERTAIN_BORDER = "#CA8A04"
 UNCERTAIN_ICON   = "❓"
 UNCERTAIN_LABEL  = "UNCERTAIN"
 
@@ -92,7 +92,7 @@ NO_MATCH_FG      = DARK_CHERRY
 NO_MATCH_BG      = WHITE
 NO_MATCH_BORDER  = CHERRY
 NO_MATCH_ICON    = "✅"
-NO_MATCH_LABEL   = "No Known Match Found"
+NO_MATCH_LABEL   = "No known match found among recognised ingredients"
 
 
 def apply_theme() -> None:
@@ -132,8 +132,8 @@ font-family:'Plus Jakarta Sans',sans-serif !important;
 color:var(--dark-cherry) !important;
 font-weight:800 !important;
 }}
-/* Hero banner: override the global heading colour so titles stay white */
-.hero h1,.hero h2,.hero h3,.hero h4 {{
+/* Hero banner: override heading colour so everything inside hero is white */
+.hero h1, .hero h2, .hero h3 {{
 color:#FFFFFF !important;
 text-shadow:0 1px 4px rgba(0,0,0,.30) !important;
 }}
@@ -141,6 +141,16 @@ text-shadow:0 1px 4px rgba(0,0,0,.30) !important;
 [data-testid="stSidebar"] {{
 background:var(--tint) !important;
 border-right:1px solid var(--border-tint) !important;
+}}
+[data-testid="stSidebar"] a {{
+border-radius:var(--radius-sm) !important;
+font-family:'Plus Jakarta Sans',sans-serif !important;
+font-weight:600 !important;
+transition:var(--transition) !important;
+}}
+[data-testid="stSidebar"] a:hover {{
+background:rgba(210,10,46,.08) !important;
+color:var(--cherry) !important;
 }}
 .stButton>button[kind="primary"] {{
 background:linear-gradient(135deg,{CHERRY},{DARK_CHERRY}) !important;
@@ -237,19 +247,67 @@ border-color:var(--cherry) !important;
 ::-webkit-scrollbar-track {{ background:var(--tint); }}
 ::-webkit-scrollbar-thumb {{ background:var(--border-tint);border-radius:99px; }}
 ::-webkit-scrollbar-thumb:hover {{ background:var(--cherry); }}
-.main .block-container {{ padding-top:1.5rem !important;padding-bottom:0 !important; }}
+.main .block-container,
+.stMainBlockContainer,
+[data-testid="stMainBlockContainer"],
+.block-container {{
+padding-top:1rem !important;
+padding-bottom:1rem !important;
+padding-left:1.5rem !important;
+padding-right:1.5rem !important;
+max-width:1200px !important;
+margin-left:auto !important;
+margin-right:auto !important;
+}}
+header[data-testid="stHeader"] {{
+background:transparent !important;
+height:1.5rem !important;
+min-height:1.5rem !important;
+}}
+[data-testid="stVerticalBlock"] {{
+gap:0.75rem !important;
+}}
 @keyframes fadeUp {{
-from {{ opacity:0;transform:translateY(12px); }}
+from {{ opacity:0;transform:translateY(10px); }}
 to {{ opacity:1;transform:translateY(0); }}
 }}
-.fade-up {{ animation:fadeUp 250ms ease forwards; }}
-.feat-card {{ transition:transform 200ms ease,box-shadow 200ms ease; }}
+@keyframes pulseDot {{
+0% {{ transform:scale(0.95);box-shadow:0 0 0 0 rgba(210,10,46,0.6); }}
+70% {{ transform:scale(1);box-shadow:0 0 0 7px rgba(210,10,46,0); }}
+100% {{ transform:scale(0.95);box-shadow:0 0 0 0 rgba(210,10,46,0); }}
+}}
+.pulse-dot {{
+width:8px;height:8px;border-radius:50%;background:{CHERRY};
+display:inline-block;animation:pulseDot 2s infinite ease-in-out;
+}}
+.fade-up {{ animation:fadeUp 220ms ease forwards; }}
+.feat-card {{ transition:transform 200ms ease,box-shadow 200ms ease,border-color 200ms ease; }}
 .feat-card:hover {{
-transform:translateY(-4px);
-box-shadow:0 12px 32px rgba(210,10,46,.15) !important;
+transform:translateY(-3px);
+box-shadow:0 10px 28px rgba(210,10,46,.14) !important;
+border-left-color:var(--deep-cherry) !important;
 }}
 .stat-card {{ transition:transform 180ms ease; }}
 .stat-card:hover {{ transform:translateY(-2px); }}
+.interactive-card {{
+transition:transform 180ms ease,box-shadow 180ms ease,border-color 180ms ease;
+}}
+.interactive-card:hover {{
+transform:translateY(-3px);
+box-shadow:0 8px 24px rgba(210,10,46,.12) !important;
+border-color:var(--cherry) !important;
+}}
+.pill-badge {{
+transition:transform 150ms ease,filter 150ms ease;
+}}
+.pill-badge:hover {{
+transform:translateY(-1px);
+filter:brightness(0.96);
+}}
+.gradient-bar {{
+background:linear-gradient(90deg,{CHERRY},{DARK_CHERRY});
+height:3px;border-radius:2px;width:100%;
+}}
 </style>
 """
     render_html(css)

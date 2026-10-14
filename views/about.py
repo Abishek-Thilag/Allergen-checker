@@ -21,18 +21,18 @@ from core.ui import (
 )
 
 DECODER_TABLE = [
-    ("Casein",              "🥛 Milk protein"),
-    ("Whey",                "🥛 Milk protein fraction"),
-    ("Maida",               "🌾 Refined wheat flour"),
-    ("Groundnut / Mungfali","🥜 Peanut"),
-    ("Ghee / Dahi / Paneer","🥛 Milk derivatives"),
-    ("INS 322",             "🫘 Lecithin (may be soy or egg)"),
-    ("Til / Gingelly",      "🌿 Sesame"),
-    ("Rai / Sarson",        "🌿 Mustard"),
-    ("Khoya / Mawa",        "🥛 Reduced milk"),
-    ("Soya / Tofu",         "🫘 Soy"),
-    ("Arachis oil",         "🥜 Peanut oil"),
-    ("Atta / Suji / Rava",  "🌾 Wheat flour / semolina"),
+    ("Casein",              "🥛 Milk protein",             "Dairy"),
+    ("Whey",                "🥛 Milk protein fraction",    "Dairy"),
+    ("Maida",               "🌾 Refined wheat flour",       "Gluten"),
+    ("Groundnut / Mungfali","🥜 Peanut",                   "Peanut"),
+    ("Ghee / Dahi / Paneer","🥛 Milk derivatives",         "Dairy"),
+    ("INS 322",             "🫘 Lecithin (soy or egg)",    "Additive"),
+    ("Til / Gingelly",      "🌿 Sesame seed",              "Seed"),
+    ("Rai / Sarson",        "🌿 Mustard seed",             "Mustard"),
+    ("Khoya / Mawa",        "🥛 Reduced dairy solids",     "Dairy"),
+    ("Soya / Tofu",         "🫘 Soy protein",              "Soy"),
+    ("Arachis oil",         "🥜 Peanut oil",               "Peanut"),
+    ("Atta / Suji / Rava",  "🌾 Wheat flour / semolina",   "Gluten"),
 ]
 
 NOT_CLAIMED = [
@@ -66,34 +66,48 @@ HOW_IT_WORKS = [
 
 def show() -> None:
     render_html(f"""
-<div style="background:{TINT};border:1px solid {BORDER_TINT};border-radius:8px;
-    padding:10px 12px;font-size:0.75rem;color:{TEXT_MUTED};line-height:1.5;margin-top:8px;">
+<div style="background:{TINT};border:1px solid {BORDER_TINT};border-radius:10px;
+    padding:10px 14px;font-size:0.75rem;color:{TEXT_MUTED};line-height:1.5;margin-top:8px;">
 ⚠️ {DISCLAIMER_TEXT_SHORT}
 </div>
 """)
     render_html(f"""
-<div style="background:{TINT};border:1px solid {BORDER_TINT};border-radius:10px;
-    padding:14px;margin:12px 0;">
-<div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;
-    font-size:0.82rem;color:{DARK_CHERRY};margin-bottom:8px;">🔗 Quick Links</div>
-<div style="display:flex;flex-direction:column;gap:6px;">
-<a href="/Check" target="_self" style="font-size:0.8rem;color:{CHERRY};
-    text-decoration:none;font-weight:500;">🔍 Go to Check page →</a>
-<a href="/History" target="_self" style="font-size:0.8rem;color:{CHERRY};
-    text-decoration:none;font-weight:500;">🕘 View History →</a>
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    background:{WHITE};border:1px solid {BORDER_TINT};border-radius:14px;
+    padding:12px 18px;margin:12px 0 20px;box-shadow:0 2px 8px rgba(210,10,46,.04);">
+<div style="display:flex;align-items:center;gap:8px;">
+<span style="font-size:1.1rem;">⚡</span>
+<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.85rem;color:{DARK_CHERRY};">
+Quick Shortcuts:
+</span>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+<a href="/Check" target="_self" style="text-decoration:none;">
+<div style="background:{TINT};color:{DARK_CHERRY};border:1px solid {BORDER_TINT};border-radius:10px;
+    padding:6px 14px;font-size:0.8rem;font-weight:700;display:flex;align-items:center;gap:6px;">
+🔍 Run Allergen Checker →
+</div>
+</a>
+<a href="/History" target="_self" style="text-decoration:none;">
+<div style="background:{TINT};color:{DARK_CHERRY};border:1px solid {BORDER_TINT};border-radius:10px;
+    padding:6px 14px;font-size:0.8rem;font-weight:700;display:flex;align-items:center;gap:6px;">
+🕘 View Audit History →
+</div>
+</a>
 </div>
 </div>
 """)
 
     # Hero
     render_html(f"""
-<div class="fade-up" style="background:linear-gradient(135deg,{CHERRY} 0%,{DARK_CHERRY} 100%);
-    border-radius:20px;padding:28px 32px;margin-bottom:28px;
-    box-shadow:0 6px 24px rgba(210,4,45,.22);">
+<div class="fade-up hero" style="background:linear-gradient(135deg,{CHERRY} 0%,{DARK_CHERRY} 100%);
+    border-radius:20px;padding:32px 36px;margin-bottom:28px;
+    box-shadow:0 8px 28px rgba(210,10,46,.22);">
 <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
-    font-size:1.6rem;color:#fff;margin:0;">ℹ️ About This App</h1>
-<p style="color:rgba(255,255,255,.88);margin:6px 0 0;font-size:0.9375rem;">
-Food Allergy Ingredient Checker — how it works, what it does, and what it doesn't.
+    font-size:1.8rem;color:#FFFFFF !important;margin:0;
+    text-shadow:0 1px 4px rgba(0,0,0,.30);">ℹ️ About The Ingredient Checker</h1>
+<p style="color:rgba(255,255,255,.92);margin:8px 0 0;font-size:0.95rem;line-height:1.6;">
+How our offline algorithmic engine decodes hidden allergens, transliterated names, and additive codes in Indian packaged food.
 </p>
 </div>
 """)
@@ -101,44 +115,65 @@ Food Allergy Ingredient Checker — how it works, what it does, and what it does
     # What it does
     render_html(f"""
 <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
-    font-size:1.2rem;color:{DARK_CHERRY};margin:0 0 16px;">🎯 What It Does</h2>
-<div style="background:{WHITE};border-radius:12px;padding:18px 22px;
-    border:1px solid {BORDER_TINT};box-shadow:0 2px 8px rgba(210,4,45,.05);
-    margin-bottom:24px;font-size:0.9375rem;color:{TEXT_BODY};line-height:1.7;">
+    font-size:1.25rem;color:{DARK_CHERRY};margin:0 0 16px;">🎯 Core Purpose</h2>
+<div style="background:{WHITE};border-radius:14px;padding:22px 24px;
+    border:1px solid {BORDER_TINT};box-shadow:0 2px 10px rgba(210,10,46,.05);
+    margin-bottom:24px;font-size:0.9375rem;color:{TEXT_BODY};line-height:1.75;">
 <strong style="color:{TEXT_DARK};">Food Allergy Ingredient Checker</strong>
-helps people with food allergies understand whether a packaged Indian food product
-contains ingredients they need to avoid.<br><br>
-Indian food labels often list allergens under technical names, Indian regional names,
-or INS/E-number additive codes that are not immediately recognisable.
+empowers consumers with food allergies to rapidly audit packaged food labels in India.
+Because Indian packaged foods frequently mention allergens under technical protein terms,
+regional culinary names, or INS/E-number additives, vital allergen warnings often go unnoticed.
 </div>
 """)
 
     # Decoder table
     render_html(f"""
 <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
-    font-size:1.2rem;color:{DARK_CHERRY};margin:0 0 16px;">📖 Hidden Name Decoder</h2>
+    font-size:1.25rem;color:{DARK_CHERRY};margin:0 0 12px;">📖 Hidden Name Reference Decoder</h2>
 """)
+
+    col_cat, col_src = st.columns([1, 1])
+    with col_cat:
+        categories = ["All Categories", "Dairy", "Gluten", "Peanut", "Soy", "Additive", "Seed", "Mustard"]
+        sel_cat = st.selectbox("Category Filter", categories, key="about_cat_filter")
+    with col_src:
+        term_search = st.text_input("Filter By Name", placeholder="e.g. maida, casein, INS 322...", key="about_term_search")
+
+    filtered_table = DECODER_TABLE
+    if sel_cat != "All Categories":
+        filtered_table = [row for row in filtered_table if row[2].lower() == sel_cat.lower()]
+    if term_search.strip():
+        q = term_search.strip().lower()
+        filtered_table = [row for row in filtered_table if q in row[0].lower() or q in row[1].lower()]
+
     rows_html = "".join([
-        f"<tr>"
-        f"<td style='padding:8px 14px;font-family:monospace;font-size:0.875rem;"
-        f"background:{TINT};color:{DARK_CHERRY};font-weight:600;"
+        f"<tr style='border-bottom:1px solid {BORDER_TINT};'>"
+        f"<td style='padding:10px 14px;font-family:monospace;font-size:0.875rem;"
+        f"background:{TINT};color:{DARK_CHERRY};font-weight:700;"
         f"border-radius:6px;white-space:nowrap;'>{label}</td>"
-        f"<td style='padding:8px 14px;color:{TEXT_BODY};font-size:0.875rem;'>{meaning}</td>"
+        f"<td style='padding:10px 14px;color:{TEXT_BODY};font-size:0.875rem;'>{meaning}</td>"
+        f"<td style='padding:10px 14px;text-align:right;'><span style='background:{TINT};color:{DARK_CHERRY};font-size:0.75rem;font-weight:700;padding:2px 8px;border-radius:6px;'>{cat}</span></td>"
         f"</tr>"
-        for label, meaning in DECODER_TABLE
+        for label, meaning, cat in filtered_table
     ])
+    if not filtered_table:
+        rows_html = f"<tr><td colspan='3' style='text-align:center;padding:20px;color:{TEXT_MUTED};'>No terms match your search filter.</td></tr>"
+
     render_html(f"""
-<div style="background:{WHITE};border-radius:12px;overflow:hidden;
-    border:1px solid {BORDER_TINT};box-shadow:0 2px 8px rgba(210,4,45,.05);
+<div style="background:{WHITE};border-radius:14px;overflow:hidden;
+    border:1px solid {BORDER_TINT};box-shadow:0 3px 12px rgba(210,10,46,.05);
     margin-bottom:24px;">
-<table style="width:100%;border-collapse:separate;border-spacing:0 6px;padding:12px 8px;">
+<table style="width:100%;border-collapse:separate;border-spacing:0 4px;padding:12px 10px;">
 <thead><tr>
 <th style="text-align:left;padding:8px 14px;font-size:0.78rem;
-    color:{TEXT_MUTED};font-weight:600;text-transform:uppercase;
-    letter-spacing:.07em;">What The Label Says</th>
+    color:{TEXT_MUTED};font-weight:700;text-transform:uppercase;
+    letter-spacing:.07em;">Label Term</th>
 <th style="text-align:left;padding:8px 14px;font-size:0.78rem;
-    color:{TEXT_MUTED};font-weight:600;text-transform:uppercase;
-    letter-spacing:.07em;">What It Actually Is</th>
+    color:{TEXT_MUTED};font-weight:700;text-transform:uppercase;
+    letter-spacing:.07em;">Actual Allergen</th>
+<th style="text-align:right;padding:8px 14px;font-size:0.78rem;
+    color:{TEXT_MUTED};font-weight:700;text-transform:uppercase;
+    letter-spacing:.07em;">Category</th>
 </tr></thead>
 <tbody>{rows_html}</tbody>
 </table>
@@ -172,8 +207,8 @@ A trace or cross-contamination statement was found.
     padding:13px 16px;display:flex;align-items:center;gap:12px;">
 <span style="color:{UNCERTAIN_FG};border-radius:20px;padding:4px 14px;font-size:0.82rem;
     font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;
-    background:rgba(0,0,0,.10);">{UNCERTAIN_ICON} {UNCERTAIN_LABEL}</span>
-<span style="font-size:0.9rem;color:{UNCERTAIN_FG};opacity:.9;">
+    background:rgba(255,255,255,.45);">{UNCERTAIN_ICON} {UNCERTAIN_LABEL}</span>
+<span style="font-size:0.9rem;color:{UNCERTAIN_FG};opacity:.95;font-weight:500;">
 Vague wording or an INS code with multiple possible sources.
 </span>
 </div>
@@ -192,7 +227,7 @@ Vague wording or an INS code with multiple possible sources.
 <div style="background:{WHITE};border-radius:12px;padding:16px;
     border-left:4px solid {CHERRY};border-top:1px solid {BORDER_TINT};
     border-right:1px solid {BORDER_TINT};border-bottom:1px solid {BORDER_TINT};
-    box-shadow:0 2px 6px rgba(210,4,45,.05);margin-bottom:12px;min-height:130px;">
+    box-shadow:0 2px 6px rgba(210,10,46,.05);margin-bottom:12px;min-height:130px;">
 <div style="font-size:1.5rem;margin-bottom:6px;">{icon}</div>
 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;
     color:{DARK_CHERRY};margin-bottom:4px;">{title}</div>
@@ -208,7 +243,7 @@ Vague wording or an INS code with multiple possible sources.
     for i, (heading, detail) in enumerate(NOT_CLAIMED, 1):
         render_html(f"""
 <div style="background:{WHITE};border-radius:10px;padding:13px 16px;
-    border:1px solid {BORDER_TINT};box-shadow:0 1px 4px rgba(210,4,45,.05);
+    border:1px solid {BORDER_TINT};box-shadow:0 1px 4px rgba(210,10,46,.05);
     margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;">
 <span style="background:{TINT};color:{DARK_CHERRY};
     border-radius:50%;width:26px;height:26px;display:flex;
@@ -227,7 +262,7 @@ This tool {heading}.
     render_html(f"""
 <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
     font-size:1.2rem;color:{DARK_CHERRY};margin:16px 0 16px;">📋 Disclaimer</h2>
-<div style="background:#FFF0F2;border:2px solid {BORDER_TINT};border-radius:14px;
+<div style="background:{TINT};border:2px solid {BORDER_TINT};border-radius:14px;
     padding:20px 24px;margin-bottom:24px;">
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
 <span style="font-size:1.5rem;">⚠️</span>
